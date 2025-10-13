@@ -5,13 +5,14 @@ import { User } from './domain/user.entity';
 import { UserRepository } from './infrastructure/user.repository';
 import { UserService } from './application/user.service';
 import { UserController } from './infrastructure/user.controller';
+import { USER_REPOSITORY_INTERFACE } from './domain/interfaces/user.repository.interface';
 
 @Module({
   imports: [TypeOrmModule.forFeature([User])],
   controllers: [UserController],
   providers: [
     UserService,
-    { provide: 'UserRepositoryInterface', useClass: UserRepository },
+    { provide: USER_REPOSITORY_INTERFACE, useClass: UserRepository },
   ],
   exports: [UserService],
 })

@@ -12,7 +12,7 @@ export class UserController {
   }
 
   @Get(':id')
-  getById(@Param('id') id: string) {
+  getById(@Param('id') id: number) {
     return this.userService.getUserById(id);
   }
 
@@ -22,7 +22,7 @@ export class UserController {
   }
 
   @Delete(':id')
-  delete(@Param('id') id: string) {
+  delete(@Param('id') id: number) {
     return this.userService.deleteUser(id);
   }
 }
