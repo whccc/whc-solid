@@ -2,21 +2,28 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { join } from 'path';
 import { UserModule } from './user/user.module';
+import { WeatherModule } from './weather/weather.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost', // Cambiar por tu host
-      port: 5432, // Puerto PostgreSQL
-      username: 'postgres', // Usuario DB
-      password: '123456789', // Contraseña DB
-      database: 'hexaagonal', // Nombre de la DB
+      host: 'localhost',
+      port: 5432,
+      username: 'postgres',
+      password: '123456789',
+      database: 'hexaagonal',
       entities: [join(__dirname, '**', '*.entity.{ts,js}')],
-      synchronize: true, // Solo en desarrollo
+      synchronize: true,
       logging: true,
     }),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: '.env',
+    }),
     UserModule,
+    WeatherModule,
   ],
   controllers: [],
   providers: [],
